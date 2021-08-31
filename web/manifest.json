@@ -1,6 +1,6 @@
 {
-    "name": "mvcs_blogpost",
-    "short_name": "mvcs_blogpost",
+    "name": "flutter_mvcs_hello_world",
+    "short_name": "flutter_mvcs_hello_world",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

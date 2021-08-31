@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(mvcs_blogpost LANGUAGES CXX)
+project(flutter_mvcs_hello_world LANGUAGES CXX)
 
-set(BINARY_NAME "mvcs_blogpost")
+set(BINARY_NAME "flutter_mvcs_hello_world")
 
 cmake_policy(SET CMP0063 NEW)
 

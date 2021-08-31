@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mvcs_blogpost/commands/base_command.dart';
 
 import '../commands/refresh_posts_command.dart';
-import '../models/app_model.dart';
-import '../models/user_model.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   bool _isLoading = false;
 
   void _handleRefreshPressed() async {
     // Disable the RefreshBtn while the Command is running
     setState(() => _isLoading = true);
     // Run command
-    await RefreshPostsCommand().run(context.read<AppModel>().currentUser);
+    await RefreshPostsCommand().run(ref.read(appModelProvider).currentUser);
     // Re-enable refresh btn when command is done
     setState(() => _isLoading = false);
   }
@@ -25,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // Bind to UserModel.userPosts
-    var users = context.select<UserModel, List<String>>((value) => value.userPosts);
+    var users = ref.watch(userModelProvider.select((model) => model.userPosts));
     // Disable btn by removing listener when we're loading.
     VoidCallback btnHandler = _isLoading ? null : _handleRefreshPressed;
     // Render list of widgets
